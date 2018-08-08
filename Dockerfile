@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:latest
+FROM jenkins/jenkins
 
 # NOTE: if we want to install via apt-get switch to root first
 USER root
@@ -20,6 +20,7 @@ RUN apt-get install -y xvfb
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 # NOTE: to allow this container to access /run/docker.sock in the host
+# Also ran chmod 777 on host /run/docker.sock first so that might have been what worked also
 RUN groupadd -g 993 docker
 RUN usermod -aG docker jenkins
 
