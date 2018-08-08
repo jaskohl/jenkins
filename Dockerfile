@@ -15,6 +15,13 @@ RUN apt-get install -y python3
 RUN apt-get install -y python3-pip 
 RUN apt-get install -y xvfb 
 
+# NOTE: requirements for chrome
+RUN apt-get install -y fonts-liberation
+RUN apt-get install -y libappindicator3-1
+RUN apt-get install -y libxss1
+RUN apt-get install -y lsb-release
+RUN apt-get install -y xdg-utils
+
 # NOTE: add jenkins user to sudoers without requiring a password
 # NOTE: can run sudo in shell 
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
