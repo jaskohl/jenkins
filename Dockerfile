@@ -33,5 +33,3 @@ RUN usermod -aG docker jenkins
 
 # NOTE: drop back to the jenkins user - good practice
 USER jenkins
-
-HEALTHCHECK CMD curl --fail http://localhost:8080/ || exit 1
