@@ -1,4 +1,4 @@
-FROM jenkins/jenkins
+FROM jenkins/jenkins:lts-jdk11
 
 # NOTE: if we want to install via apt-get switch to root first
 USER root
