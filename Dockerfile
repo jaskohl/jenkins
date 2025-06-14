@@ -3,24 +3,19 @@ FROM jenkins/jenkins:lts-jdk11
 # NOTE: if we want to install via apt-get switch to root first
 USER root
 
-# NOTE: update first
-RUN apt-get update 
-
-# NOTE: install packages
-RUN apt-get install -y sudo 
-RUN apt-get install -y apt-utils 
-
-# NOTE: needed for selenium testing
-RUN apt-get install -y python3
-RUN apt-get install -y python3-pip 
-RUN apt-get install -y xvfb 
-
-# NOTE: requirements for chrome
-RUN apt-get install -y fonts-liberation
-RUN apt-get install -y libappindicator3-1
-RUN apt-get install -y libxss1
-RUN apt-get install -y lsb-release
-RUN apt-get install -y xdg-utils
+# NOTE: update, install packages, and clean up in one layer
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    sudo \
+    apt-utils \
+    python3 \
+    python3-pip \
+    xvfb \
+    fonts-liberation \
+    libappindicator3-1 \
+    libxss1 \
+    lsb-release \
+    xdg-utils \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # NOTE: add jenkins user to sudoers without requiring a password
 # NOTE: can run sudo in shell 
